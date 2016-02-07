@@ -1,0 +1,153 @@
+nav li {
+    display: inline-block;
+    padding-left: 12px;
+}
+nav li a {
+    color: #1B253B;
+}
+
+.redLinks {
+    color: red;
+}
+
+.row-fluid {
+    width:1000px;
+    margin:0 auto;
+}
+
+.PlanPricing {
+    width:300px;
+    padding:10px;
+    display: inline-block;
+    border: 1px solid black;
+}
+
+.PlanPricing .planName {
+    padding-bottom:10px;
+    text-align:center;
+}
+.PlanPricing .price {
+    background:#2cc76a;
+    padding:5px;
+    color:#FFF;
+    font-size:50px;
+    -webkit-border-radius:100%;
+    -moz-border-radius:100%;
+    border-radius:100%;
+    display:block;
+    width:100px;
+    height:100px;
+    line-height:100px;
+    margin:0 auto;
+    position:relative;
+    margin-top:-107px;
+    margin-bottom:10px;
+}
+.PlanPricing.Recommended .price {
+    background:#f45c57;
+}
+.PlanPricing .planName h3 {
+    color:#FFF;
+    text-align:center;
+    padding:0;
+    margin:0;
+    text-transform:uppercase;
+}
+.PlanPricing .planName p {
+    color:#999;
+    text-align:center;
+}
+.PlanPricing .planFeatures {
+    text-align:center;
+    padding:10px;
+}
+.PlanPricing .planFeatures ul {
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+.PlanPricing .planFeatures ul li {
+    padding:13px 0;
+    list-style:none;
+}
+.PlanPricing p {
+    margin:0;
+}
+.PlanPricing .btn {
+    width:100%;
+    -webkit-border-radius:0;
+    -moz-border-radius:0;
+    border-radius:0;
+    margin:0;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+
+/*========= Price CSS==============*/
+
+
+.template4{
+    font-size:13px;
+    font-weight:300;
+    position:relative;
+    border-top:5px solid #1B253B;
+    transition: all 1s linear 0s;
+    background:#fff;
+}
+
+
+
+
+
+.PlanPricing.template4 .planName h3 {
+    color: #333;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+
+.PlanPricing.template4 .btn {
+    border-radius: 0;
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 60%;
+    color:#fff;
+    font-size:15px;
+    padding:7px 30px;
+    background: #1B253B; /* Old browsers */
+}
+
+
+
+
+.span3.PlanPricing.template4 > p {
+    text-align: center;
+}
+
+
+.PlanPricing.template4 .price {
+    background: none repeat scroll 0 0 #1B253B;
+    border-radius: 0;
+    color: #FFFFFF;
+    font-size: 40px;
+    height: 40px;
+    line-height: 40px;
+    padding: 5px;
+    position: absolute;
+    left:0;
+    top:-150px;
+    width: 100%;
+    display: none;
+
+}
+
+
+
+.template4 .planFeatures {
+    color: #333333;
+}

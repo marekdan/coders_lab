@@ -1,0 +1,16 @@
+.borderClass {
+    border: 1px solid green;
+    padding: 2px 5px;
+}
+
+.fontColor {
+    color: white;
+}
+
+.backgroundColor {
+    background-color: black;
+}
+
+.listWidth {
+    width: 100px;
+}
