@@ -80,7 +80,7 @@ class firstController extends Controller {
     }
 
     /**
-     * @Route("/setSession/{value}")
+     * @Route("/setSession/{value}", name = "setSession")
      */
     public function setSessionAction($value) {
         $session = new Session();
@@ -90,7 +90,7 @@ class firstController extends Controller {
     }
 
     /**
-     * @Route("/getSession")
+     * @Route("/getSession", name = "getSession")
      */
     public function getSessionAction(Request $reg) {
         $session = $reg->getSession()->get('usertext', 'Nie ma takiej sesji');
@@ -99,7 +99,7 @@ class firstController extends Controller {
     }
 
     /**
-     * @Route("/setCookie/{value}")
+     * @Route("/setCookie/{value}", name = "setCookie")
      */
     public function setCookieAction($value) {
         $cookie = new Cookie('myCookie', $value, time() + 3600);
@@ -110,7 +110,7 @@ class firstController extends Controller {
     }
 
     /**
-     * @Route("/getCookie")
+     * @Route("/getCookie", name = "getCookie")
      */
     public function getCookieAction(Request $req) {
         $cookie = $req->cookies->all();
@@ -126,7 +126,7 @@ class firstController extends Controller {
     }
 
     /**
-     * @Route("/delCookie")
+     * @Route("/delCookie", name = "delCookie")
      */
     public function deleteCookieAction() {
         $response = new Response('Cookie deleted');
@@ -136,7 +136,7 @@ class firstController extends Controller {
     }
 
     /**
-     * @Route("/redirectMe/{username}")
+     * @Route("/redirectMe/{username}", name = "redirectMe")
      */
     public function redirectMeAction($username) {
         return $this->redirectToRoute('goodBye', array('username' => $username));
@@ -174,25 +174,51 @@ class firstController extends Controller {
         );
 
         $urlFive = $this->generateUrl(
-            'form',
-            array(
-                'id' => '2',
-            )
+            'form'
         );
 
         $urlSix = $this->generateUrl(
-            'form',
+            'form'
+        );
+
+        $urlSeven = $this->generateUrl(
+            'setSession',
             array(
-                'id' => '2',
+                'value' => 'Tekst z sesji',
             )
         );
 
-        $links .= '<a href ="' . $urlOne . '">Link1</a><br>';
-        $links .= '<a href ="' . $urlTwo . '">Link2</a><br>';
-        $links .= '<a href ="' . $urlThree . '">Link3</a><br>';
-        $links .= '<a href ="' . $urlFour . '">Link4</a><br>';
-        $links .= '<a href ="' . $urlFive . '">Link4</a><br>';
-        $links .= '<a href ="' . $urlSix . '">Link4</a><br>';
+        $urlEight = $this->generateUrl(
+            'getSession'
+        );
+
+
+        $urlNine = $this->generateUrl(
+            'setCookie',
+            array(
+                'value' => 'wartosc z ciasteczka',
+            )
+        );
+
+        $urlTen = $this->generateUrl(
+            'getCookie'
+        );
+
+        $urlEleven = $this->generateUrl(
+            'delCookie'
+        );
+
+        $links .= '<a href ="' . $urlOne . '">Link1 helloWorld</a><br>';
+        $links .= '<a href ="' . $urlTwo . '">Link2 goodBye</a><br>';
+        $links .= '<a href ="' . $urlThree . '">Link3 welcome</a><br>';
+        $links .= '<a href ="' . $urlFour . '">Link4 showPost</a><br>';
+        $links .= '<a href ="' . $urlFive . '">Link5 form</a><br>';
+        $links .= '<a href ="' . $urlSix . '">Link6 form</a><br>';
+        $links .= '<a href ="' . $urlSeven . '">Link7 setSession</a><br>';
+        $links .= '<a href ="' . $urlEight . '">Link8 getSession</a><br>';
+        $links .= '<a href ="' . $urlNine . '">Link9 setCookie</a><br>';
+        $links .= '<a href ="' . $urlTen . '">Link10 getCookie</a><br>';
+        $links .= '<a href ="' . $urlEleven . '">Link11 delCookie</a><br>';
 
 
         return new Response($links);
