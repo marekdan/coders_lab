@@ -1,0 +1,20 @@
+{% extends 'CodersLabBundle:Views:pattern.html.twig' %}
+{% block title %}
+    Random
+{% endblock %}
+{% block control %}
+    Views Controller
+{% endblock %}
+{% block content %}
+    Array generated in php<br>
+    {% for key, val in array %}
+        Element: {{ key }} Value: {{ val }} <br>
+    {% else %}
+        Nie ma tablicy
+    {% endfor %}
+    <br><br><br><br>
+    Array generated in twig<br>
+    {% for key in 0..n %}
+        Element: {{ key }} Wartosc: {{ random(start..end) }}<br>
+    {% endfor %}
+{% endblock %}

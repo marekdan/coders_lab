@@ -1,0 +1,32 @@
+<!DOCTYPE>
+<html>
+<head>
+    {% block title %}
+        My Title
+    {% endblock %}
+</head>
+<body>
+<div>
+    {% block menu %}
+        <a href="{{ path('coderslab_views_render') }}">coderslab_views_render</a><br>
+        <a href="{{ path('coderslab_views_rendername', {'username':'marek'}) }}">coderslab_views_rendername</a><br>
+        <a href="{{ path('coderslab_views_repeat', {'n': '1'}, {'text': 'asdasd'}) }}">coderslab_views_repeat</a><br>
+        <a href="{{ path('coderslab_views_repeatsentence', {'n': '1'}) }}">coderslab_views_repeatsentence</a><br>
+        <a href="{{ url('coderslab_views_repeat', {'n': '1'}, {'text': 'asdasd'}) }}">coderslab_views_repeat</a><br>
+        <a href="{{ url('coderslab_views_repeatsentence', {'n': '1'}) }}">coderslab_views_repeatsentence</a><br>
+    {% endblock %}
+</div>
+<h1>
+    {% block control %}
+        My control
+    {% endblock %}
+</h1>
+
+<div>
+    {% block content %}
+        My Content
+    {% endblock %}
+</div>
+
+</body>
+</html>

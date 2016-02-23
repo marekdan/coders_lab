@@ -1,0 +1,11 @@
+{% extends 'CodersLabBundle:Views:pattern.html.twig' %}
+{% block title %}
+    Show Article
+{% endblock %}
+{% block control %}
+    Views Controller
+{% endblock %}
+{% block content %}
+    <h1>Title: {{ article.title }} Id:{{ article.id }}</h1>
+    <p>{{ article.articleText }}</p>
+{% endblock %}

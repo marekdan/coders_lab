@@ -1,0 +1,12 @@
+{% extends 'CodersLabBundle:Views:pattern.html.twig' %}
+{% block title %}
+    Show All Article
+{% endblock %}
+{% block control %}
+    Views Controller
+{% endblock %}
+{% block content %}
+    {% for key in articles %}
+        {% include 'CodersLabBundle:Views:article.html.twig' with {'article': key} %}
+    {% endfor %}
+{% endblock %}

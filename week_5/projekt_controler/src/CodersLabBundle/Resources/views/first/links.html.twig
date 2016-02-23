@@ -1,0 +1,7 @@
+{#{% for key, val in links %}
+    <a href="{{ path(key) }}">Link: {{ key }}</a><br>
+{% endfor %}#}
+
+{% for link,slugs in links %}
+    <a href="{{ path(link, slugs) }}">Link do: {{ link }}</a><br>
+{% endfor %}

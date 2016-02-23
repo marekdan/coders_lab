@@ -1,0 +1,15 @@
+{% extends 'CodersLabBundle:Views:pattern.html.twig' %}
+{% block title %}
+    Repeat2
+{% endblock %}
+{% block control %}
+    Views Controller
+{% endblock %}
+{% block content %}
+    ilośc powtorzen:
+    {{ repeat }} <br>
+
+    {% for key, val in 1..repeat %}
+        <br>{{ text }}<br>
+    {% endfor %}
+{% endblock %}

@@ -192,7 +192,6 @@ class firstController extends Controller {
             'getSession'
         );
 
-
         $urlNine = $this->generateUrl(
             'setCookie',
             array(
@@ -222,5 +221,26 @@ class firstController extends Controller {
 
 
         return new Response($links);
+    }
+
+    /**
+     * @Route("/getLinks")
+     * @Template("CodersLabBundle:first:links.html.twig")
+     */
+    public function getLinks() {
+        $links =[
+            'helloWorld'=>[],
+            'goodBye'=>['username'=>'Marko'],
+            'welcome'=>['name'=>'Marko', 'surname'=>'surname'],
+            'showPost'=>['id'=>'1'],
+            'form'=>[],
+            'setSession'=>['value'=> 'qwer'],
+            'getSession'=>[],
+            'setCookie'=>['value'=>'123'],
+            'getCookie'=>[],
+            'delCookie'=>[],
+        ];
+
+        return ['links' => $links];
     }
 }

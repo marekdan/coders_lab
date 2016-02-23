@@ -1,0 +1,69 @@
+{#
+przyklad_1
+Na odwrot: {{ name|nl2br }}<br>#}
+
+{#przyklad_2
+Imie to: {{ name }} <br>
+Dlugosć: {{ name|length }}<br>
+Na odwrot: {{ name|reverse }}<br>#}
+
+{#przyklad_3
+{% if (name|length > 5) %}
+    Wieksze niz 5 znakow
+{% else %}
+    Nie jest wieksze niz 5 znakow
+{% endif %}#}
+
+{#
+przyklad_4
+{% if (name in right) %}
+    Jest
+{% else %}
+    Nie ma
+{% endif %}#}
+
+{#
+przyklad_5
+{% if (name in right) %}
+    Login poprawny
+{% else %}
+    Poprawne loginy to:<br>
+    {% for key, val in right %}
+        {{ val }}
+        <br>
+    {% endfor %}
+{% endif %}#}
+
+{% extends 'CodersLabBundle:Default:webpage.html.twig' %}
+
+{% block title %}
+    {{ parent() }}
+    - Lista osob
+{% endblock %}
+
+{% block content %}
+<ul>
+    {% for name in right %}
+        {% include 'CodersLabBundle:Default:person.html.twig' with {'name': name} %}
+    {% endfor %}
+</ul>
+{% endblock %}
+
+{#nie działą
+<img src="{{ asset("/CodersLabBundle/web/images/obrazek.jpeg") }}">#}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

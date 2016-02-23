@@ -1,0 +1,19 @@
+{% extends 'CodersLabBundle:Views:pattern.html.twig' %}
+{% block title %}
+    Repeat
+{% endblock %}
+{% block control %}
+    Views Controller
+{% endblock %}
+{% block content %}
+    ilośc powtorzen:
+    {{ repeat }} <br>
+
+    {#{% for key, val in range(0, repeat-1) %}
+        <br>Symfony jest fajnne<br>
+    {% endfor %}#}
+
+    {% for key, val in 1..repeat %}
+        <br>Symfony jest fajnne<br>
+    {% endfor %}
+{% endblock %}
