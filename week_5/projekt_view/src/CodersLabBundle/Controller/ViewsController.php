@@ -56,7 +56,7 @@ class ViewsController extends Controller {
     }
 
     /**
-     * @Route("/showArticle/{id}")
+     * @Route("/showArticle/{id}", name = "showArticle")
      * @Template("CodersLabBundle:Views:article.html.twig")
      */
     public function showArticleAction($id){
@@ -75,6 +75,15 @@ class ViewsController extends Controller {
         return ['articles' => $articles];
     }
 
+    /**
+     * @Route("/linksToArticles")
+     * @Template("CodersLabBundle:Views:linksToArticles.html.twig")
+     */
+    public function linksToArticlesAction(){
+        $articles = Article::GetAllArticles();
+
+        return ['articles' => $articles];
+    }
 }
 
 /*

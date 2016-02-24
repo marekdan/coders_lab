@@ -1,0 +1,22 @@
+{#
+<h1>Dane użytkwnika:</h1>
+<hr>
+ID: {{ user.id }}<br>
+Username: {{ user.username }}<br>
+Age: {{ user.age }}<br>
+Email: {{ user.email }}<br>
+#}
+
+{% if user is null %}
+    User doesn't exist's
+{% else %}
+    <h1>ID: {{ user.id }}</h1>
+    <p>Username: {{ user.username }}</p>
+    Age: {{ user.age }}<br>
+    Email: {{ user.email }}<br>
+    <ul>
+        {% for post in user.posts %}
+            <li>{{ post.title }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}

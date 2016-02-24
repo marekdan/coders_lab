@@ -1,0 +1,18 @@
+{% if (post is null) %}
+    Nie ma takiego postu
+{% else %}
+    ID: {{ post.id }}<br>
+    Title: {{ post.title }}<br>
+    Text: {{ post.postText }}<br>
+    Rating: {{ post.rating }}<br>
+    Autor:
+    {% if post.user is null %}
+        nieznany
+    {% else %}
+        {{ post.user.username }}
+        {% for post in post.user.posts %}
+            <li>{{ post.title }}</li>
+        {% endfor %}
+    {% endif %}
+    <hr>
+{% endif %}

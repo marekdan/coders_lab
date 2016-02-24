@@ -1,0 +1,5 @@
+{% for user in users %}
+    {% include 'CodersLabBundle:User:showUser.html.twig' with {'user': user} %}
+{% else %}
+    Users doesn't exist's
+{% endfor %}

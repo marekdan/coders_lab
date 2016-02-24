@@ -3,6 +3,7 @@
 <head>
     {% block title %}
         My Title
+        <hr>
     {% endblock %}
 </head>
 <body>
@@ -27,6 +28,11 @@
         My Content
     {% endblock %}
 </div>
-
+<div>
+    {% block footer %}
+        <hr>footer<hr>
+        {% render '/linksToArticles' %}
+    {% endblock %}
+</div>
 </body>
 </html>

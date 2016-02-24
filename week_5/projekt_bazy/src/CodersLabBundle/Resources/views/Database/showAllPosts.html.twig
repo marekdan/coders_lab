@@ -1,0 +1,5 @@
+{% for post in posts %}
+    {% include 'CodersLabBundle:Database:showPost.html.twig' with {'post': post} %}
+{% else %}
+    Posts doesnt exist
+{% endfor %}
