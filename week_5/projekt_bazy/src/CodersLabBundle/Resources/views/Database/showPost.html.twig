@@ -13,6 +13,10 @@
         {% for post in post.user.posts %}
             <li>{{ post.title }}</li>
         {% endfor %}
+        <h3>Tagi do postu:</h3>
+        {% for tag in post.tags %}
+            <li>{{ tag.tagText }}</li>
+        {% endfor %}
     {% endif %}
     <hr>
 {% endif %}

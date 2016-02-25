@@ -8,64 +8,94 @@ use CodersLabBundle\Entity\Tag;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class DatabaseController extends Controller {
 
-    /*
-     * 1. To ma zwracac abiekt tag po jego tagtext
-     * 2. Sprawdzam czy tag z takim text juz istnieje, jak tak to go zwraca
-     * 3. Jak nie ma, to tworzy i zwraca
-     *
-     * -findTagBytext
-     * BEZ ROUTA
+    private function generatePostUrlAction($post) {
+        $form = $this->createFormBuilder($post);
+        $form->add('title', 'text');
+        $form->add('rating', 'text');
+        $form->add('postText', 'text');
+        $form->add('save', 'submit', ['label' => 'Add']);
+        $form->add('tags', 'entity',
+        ['class'=>'CodersLabBundle:Tag',
+        'choice_label'=>'tagText',
+        'expanded'=>'true',
+        'multiple'=>'true']);
+        $form->setAction($this->generateUrl('create'));
+        $postForm = $form->getForm();
+
+        return $postForm;
+    }
+
+    /**
+     * @Route("/newPost")
+     * @Template()
      */
+    public function newPostAction() {
+        $post = new Post();
+
+        $postForm = $this->generatePostUrlAction($post);
+
+        return ['form' => $postForm->createView()];
+    }
+
+    /**
+     * @Route("/create", name = "create")
+     */
+    public function createAction(Request $req) {
+        $post = new Post();
+
+        $form = $this->generatePostUrlAction($post);
+        $form->handleRequest($req);
+
+        if($form->isSubmitted()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($post);
+            $em->flush();
+        }
+
+//        $userRepo = $this->getDoctrine()->getRepository('CodersLabBundle:User');
+//        $user = $userRepo->find(1);
+
+//        //dodawanie taga
+//        $tags = explode(',', $tagStr);
+//        foreach ($tags as $tagText) {
+//            $this->mapPostAndTag($post, $tagText);
+//        }
+
+//        $post->setUser($user);
+//        $user->addPost($post);
+
+        $postId = $post->getId();
+
+        return new Response('Dodano nowy post z id' . $postId);
+    }
+
     private function getTag($tagText) {
         $repo = $this->getDoctrine()->getRepository('CodersLabBundle:Tag');
-        $exists = $repo->findOneByTagText($tagText);
-        if (!($exists)) {
+        $tag = $repo->findOneByTagText($tagText);
+        if (!($tag)) {
             $tag = new Tag();
             $tag->setTagText($tagText);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($tag);
-
-            return $tag;
         }
-        $tag = $repo->findOneByTagText($tagText);
 
         return $tag;
-        //exista zmienic na tag i susuna returna i ostatni tag zwaracajcy wartosc
     }
 
     /**
-     * @Route("/create")
+     *
      */
-    public function createAction() {
-        $post = new Post();
-        $post->setTitle('Czwarty post');
-        $post->setPostText('zzzzzzzzzz');
-        $post->setRating(8);
+    public function mapPostAndTag($post, $tagText) {
+        $tag = $this->getTag($tagText);
 
-        $userRepo = $this->getDoctrine()->getRepository('CodersLabBundle:User');
-        $user = $userRepo->find(1);
-
-        $post->setUser($user);
-        $user->addPost($post);
-        $post->addTag($this->getTag('tagtext'));
-
-        //to nam pobierze entity menegera
-        $em = $this->getDoctrine()->getManager();
-
-        //to nam zapamieta obiekt
-        $em->persist($post);
-
-        //poinformujmy menedzera zeby zapisal boiekt do bazy
-        $em->flush();
-
-        $noweId = $post->getId();
-
-        return new Response('Dodano nowy post z id' . $noweId);
+        $post->addTag($tag);
+        $tag->addPost($post);
     }
 
     /**
@@ -82,7 +112,7 @@ class DatabaseController extends Controller {
     }
 
     /**
-     * @Route("/getPostToTwig/{id}")
+     * @Route("/getPostToTwig/{id}", name = "getPostToTwig")
      * @Template("CodersLabBundle:Database:showPost.html.twig")
      */
     public function getPostToTwigAction($id) {

@@ -1,0 +1,6 @@
+{% for tag in allTags %}
+    <h2>ID Taga: {{ tag.id }}</h2>
+    {% for post in tag.posts %}
+        <a href="{{ path('getPostToTwig',{'id':post.id}) }}">{{ post.postText }}</a><br><br>
+    {% endfor %}
+{% endfor %}

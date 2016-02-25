@@ -7,25 +7,52 @@ use CodersLabBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller {
 
-    /**
-     * @Route("/createUser")
-     */
-    public function createUserAction() {
-        $user = new User();
-        $user->setUsername('Adam');
-        $user->setEmail('adam@pl');
-        $user->setAge(25);
+    private function generateUserForm($user) {
+        $form = $this->createFormBuilder($user);
+        $form->add('username', 'text');
+        $form->add('age', 'number');
+        $form->add('email', 'email');
+        $form->add('save', 'submit', ['label' => 'Utworz nowego uzytkownika']);
+        $form->setAction($this->generateUrl('createUser'));
+        $userForm = $form->getForm();
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($user);
-        $em->flush();
+        return $userForm;
+    }
+
+    /**
+     * @Route("/newUser")
+     * @Template()
+     */
+    public function newUserAction() {
+        $user = new User();
+
+        $userForm = $this->generateUserForm($user);
+
+        return ['form' => $userForm->createView()];
+    }
+
+    /**
+     * @Route("/createUser", name = "createUser")
+     */
+    public function createUserAction(Request $req) {
+        $user = new User();
+
+        $form = $this->generateUserForm($user);
+        $form->handleRequest($req);
+        if($form->isSubmitted()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+        }
+
         $userId = $user->getId();
 
-        return new Response('Dodano usera o id: ' . $userId);
+        return $this->redirectToRoute('showUser', ['id'=>$userId]);
     }
 
     /**
@@ -61,7 +88,7 @@ class UserController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
-        return $this->redirectToRoute('showUser', ['id'=>$id]);
+        return $this->redirectToRoute('showUser', ['id' => $id]);
     }
 
     /**
@@ -76,6 +103,7 @@ class UserController extends Controller {
         $em->remove($user);
         $em->flush();
 
-        return ['user'=>$user];
+        return ['user' => $user];
     }
+
 }
