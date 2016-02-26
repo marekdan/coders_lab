@@ -1,2 +1,2 @@
 # coders_lab
-Files created during Coders's Lab Bootcamp
+Exercises created during Coders's Lab Bootcamp
