@@ -1,0 +1,32 @@
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST">
+    <div class="form-group" id="fos_user_registration_form">
+        Email:<br>
+        {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'form.email'|trans } }) }}
+        {{ form_errors(form.email) }}
+
+        <br><br>
+        Twoja nazwa użytkownika:<br>
+        {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'form.username'|trans } }) }}
+        {{ form_errors(form.username) }}
+
+        <br><br>
+        Hasło:<br>
+        {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control' } }) }}
+        {{ form_errors(form.plainPassword.first) }}
+
+        <br><br>
+        Powtórz hasło:<br>
+        {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'form.password_confirmation'|trans } }) }}
+        {{ form_errors(form.plainPassword.second) }}
+
+        <br><br>
+        Opisz swoje życie w 3 słowach:<br>
+        {{ form_widget(form.description, { 'attr': {'class': 'form-control' }, 'label':'Opis' }) }}
+
+        {{ form_rest(form) }}
+
+    </div>
+    <div>
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="REJESTRUJ MNIE NA LISTĘ OCZEKUJĄCY DO NFZ">
+    </div>
+</form>
